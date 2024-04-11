@@ -4,7 +4,7 @@
 void printMatrix();
 int  **additionMatrix();
 int **subtractionMatrix();
-void transposeMatrix();
+int **transposeMatrix();
 void multiplyMatrix();
 void freeMatrix();
 
@@ -18,7 +18,8 @@ int main() {
 
     //동적 메모리 할당
     int **matrixA = (int **)malloc(rows * sizeof(int *));
-    int **matrixB = (int **)malloc(rows * sizeof(int *));
+    int **matrixB = (int **)malloc(rows * sizeof(int *
+    ));
     for (int i = 0; i < rows; i++) {
         matrixA[i] = (int *)malloc(cols * sizeof(int));
         matrixB[i] = (int *)malloc(cols * sizeof(int));
@@ -33,8 +34,9 @@ int main() {
     }
 
     printMatrix(matrixA, matrixB, rows, cols);
-    int **addResultMatrix = additionMatrix(matrixA, matrixB, addResultMatrix, rows, cols);
-    int **subResultMatrix = subtractionMatrix(matrixA, matrixB, addResultMatrix, rows, cols);
+    int **addResultMatrix = additionMatrix(matrixA, matrixB, rows, cols);
+    int **subResultMatrix = subtractionMatrix(matrixA, matrixB, rows, cols);
+    int **transResultMatrix = transposeMatrix(matrixA, rows, cols);
     return 0;
 }
 
@@ -57,7 +59,7 @@ void printMatrix(int **matrixA, int **matrixB, int rows, int cols) {
     printf("printMatrix함수 종료\n");
 }
 
-int **additionMatrix(int **matrixA, int **matrixB, int **addResultMatrix, int rows, int cols) {
+int **additionMatrix(int **matrixA, int **matrixB, int rows, int cols) {
     printf("additionMatrix함수 시작\n");
 
     // 결과값 2차원배열 선언
@@ -87,7 +89,7 @@ int **additionMatrix(int **matrixA, int **matrixB, int **addResultMatrix, int ro
 
 
 
-int **subtractionMatrix(int **matrixA, int **matrixB, int **addResultMatrix, int rows, int cols) {
+int **subtractionMatrix(int **matrixA, int **matrixB, int rows, int cols) {
     printf("subtractionMatrix 시작\n");
 
     // 결과값 2차원배열 선언
@@ -116,8 +118,32 @@ int **subtractionMatrix(int **matrixA, int **matrixB, int **addResultMatrix, int
 }
 
 
-void transposeMatrix() {
-   
+int **transposeMatrix(int **matrixA, int rows, int cols) {
+    printf("transposeMatrix 시작");
+   // 결과값 2차원배열 선언
+
+    int **result = (int **)malloc(cols * sizeof(int *));
+    for (int i = 0; i < rows; i++) {
+        result[i] = (int *)malloc(rows * sizeof(int));
+    }
+    
+    // 트랜스포즈
+   for (int i = 0; i < cols; i++) {
+        for (int j = 0; j < rows; j++) {
+               result[i][j] = matrixA[j][i];
+        }  
+    }
+
+    // 확인
+    for (int i = 0; i < cols; i++) {
+        for (int j = 0; j < rows; j++) {
+               printf("%d ", result[i][j]);
+        }  
+        printf("\n");
+    }
+
+    printf("transposeMatrix 종료\n");
+    return result;
 }
 
 
