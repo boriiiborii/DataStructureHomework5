@@ -2,10 +2,10 @@
 #include <stdlib.h>
 
 void printMatrix();
-int  **additionMatrix();
+int **additionMatrix();
 int **subtractionMatrix();
 int **transposeMatrix();
-void multiplyMatrix();
+int **multiplyMatrix();
 void freeMatrix();
 
 
@@ -37,6 +37,7 @@ int main() {
     int **addResultMatrix = additionMatrix(matrixA, matrixB, rows, cols);
     int **subResultMatrix = subtractionMatrix(matrixA, matrixB, rows, cols);
     int **transResultMatrix = transposeMatrix(matrixA, rows, cols);
+    int **mulResultMatrix = multiplyMatrix(matrixA, matrixB, rows, cols);
     return 0;
 }
 
@@ -147,8 +148,33 @@ int **transposeMatrix(int **matrixA, int rows, int cols) {
 }
 
 
-void multiplyMatrix() {
+int  **multiplyMatrix(int **matrixA, int **matrixB, int rows, int cols) {
+    printf("multiplyMatrix 시작\n");
+    // 결과값 행렬 선언
+    int **result = (int **)malloc(rows * sizeof(int *));
+    for (int i = 0; i < rows; i++) {
+        result[i] = (int *)malloc(cols * sizeof(int));
+    }
+    
+    // 행렬 곱셈 연산
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < cols; j++) {
+            result[i][j] = 0;
+            for (int k = 0; k < cols; k++) {
+                result[i][j] += matrixA[i][k] * matrixB[k][j];
+            }
+        }
+    }
 
+    // 확인
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < cols; j++) {
+               printf("%d ", result[i][j]);
+        }  
+        printf("\n");
+    }
+    printf("multiplyMatrix 끝\n");
+    return result;
 }
 
 
