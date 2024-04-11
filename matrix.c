@@ -2,7 +2,7 @@
 #include <stdlib.h>
 
 void printMatrix();
-void additionMatrix();
+int  **additionMatrix();
 void subtractionMatrix();
 void transposeMatrix();
 void multiplyMatrix();
@@ -33,31 +33,57 @@ int main() {
     }
 
     printMatrix(matrixA, matrixB, rows, cols);
-    
+    int **addResultMatrix = additionMatrix(matrixA, matrixB, addResultMatrix, rows, cols);
     return 0;
 }
 
 void printMatrix(int **matrixA, int **matrixB, int rows, int cols) {
+    printf("printMatrix함수 시작\n");
     printf("매트릭스A출력\n");
     for (int i = 0; i < rows; i++) {
         for (int j = 0; j < cols; j++) {
-               printf("%d", matrixA[i][j]);
+               printf("%d ", matrixA[i][j]);
         }  
         printf("\n");
     }
     printf("매트릭스B출력\n");
     for (int i = 0; i < rows; i++) {
         for (int j = 0; j < cols; j++) {
-               printf("%d", matrixB[i][j]);
+               printf("%d ", matrixB[i][j]);
         }  
          printf("\n");
     }
-    
+    printf("printMatrix함수 종료\n");
 }
 
-void additionMatrix() {
-   
+int **additionMatrix(int **matrixA, int **matrixB, int **addResultMatrix, int rows, int cols) {
+    printf("additionMatrix함수 시작\n");
+
+    // 결과값 2차원배열 선언
+    int **result = (int **)malloc(rows * sizeof(int *));
+    for (int i = 0; i < rows; i++) {
+        result[i] = (int *)malloc(cols * sizeof(int));
+    }
+    
+    // 더한 값들 집어넣는 이차원 배열
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < cols; j++) {
+               result[i][j] = matrixA[i][j] + matrixB[i][j];
+        }  
+    }
+
+    // 더한값이 들어갔는지 프린트
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < cols; j++) {
+               printf("%d ", result[i][j]);
+        }  
+        printf("\n");
+    }
+
+    printf("additionMatrix함수 종료\n");
+    return result;
 }
+
 
 
 void subtractionMatrix() {
