@@ -31,12 +31,28 @@ int main() {
             matrixB[i][j] = rand()%10;
         }
     }
+
+    printMatrix(matrixA, matrixB, rows, cols);
     
     return 0;
 }
 
-void printMatrix() {
-   
+void printMatrix(int **matrixA, int **matrixB, int rows, int cols) {
+    printf("매트릭스A출력\n");
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < cols; j++) {
+               printf("%d", matrixA[i][j]);
+        }  
+        printf("\n");
+    }
+    printf("매트릭스B출력\n");
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < cols; j++) {
+               printf("%d", matrixB[i][j]);
+        }  
+         printf("\n");
+    }
+    
 }
 
 void additionMatrix() {
