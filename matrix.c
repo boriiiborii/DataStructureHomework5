@@ -3,7 +3,7 @@
 
 void printMatrix();
 int  **additionMatrix();
-void subtractionMatrix();
+int **subtractionMatrix();
 void transposeMatrix();
 void multiplyMatrix();
 void freeMatrix();
@@ -34,6 +34,7 @@ int main() {
 
     printMatrix(matrixA, matrixB, rows, cols);
     int **addResultMatrix = additionMatrix(matrixA, matrixB, addResultMatrix, rows, cols);
+    int **subResultMatrix = subtractionMatrix(matrixA, matrixB, addResultMatrix, rows, cols);
     return 0;
 }
 
@@ -86,8 +87,32 @@ int **additionMatrix(int **matrixA, int **matrixB, int **addResultMatrix, int ro
 
 
 
-void subtractionMatrix() {
-   
+int **subtractionMatrix(int **matrixA, int **matrixB, int **addResultMatrix, int rows, int cols) {
+    printf("subtractionMatrix 시작\n");
+
+    // 결과값 2차원배열 선언
+    int **result = (int **)malloc(rows * sizeof(int *));
+    for (int i = 0; i < rows; i++) {
+        result[i] = (int *)malloc(cols * sizeof(int));
+    }
+    
+    // 뺀 값들 집어넣는 이차원 배열
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < cols; j++) {
+               result[i][j] = matrixA[i][j] - matrixB[i][j];
+        }  
+    }
+
+    // 뺀값이 들어갔는지 프린트
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < cols; j++) {
+               printf("%d ", result[i][j]);
+        }  
+        printf("\n");
+    }
+
+    printf("subtractionMatrix 종료\n");
+    return result;
 }
 
 
